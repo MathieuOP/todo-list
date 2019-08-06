@@ -17,8 +17,22 @@ class AddTodo extends React.Component {
         deleteTodo(id);
     }
 
+    handleContent = (id, checked, todo) => (
+        <li key={id} className="todoList-content">
+            <div>
+                <CheckboxTodo todoId={id} todoCheck={checked} />
+                <span className={checked ? 'todoList-text todoList-text--active' : 'todoList-text'}>
+                    { todo }                                      
+                </span>
+            </div>
+            <div>
+                <span className="todoList-btn" onClick={this.handleClick(id)}>x</span>
+            </div>
+        </li>
+    )
+
     render() {
-        const { todoList } = this.props;
+        const { todoList, displayTodoList } = this.props;
         // console.log(todoList);
 
         return(
@@ -27,17 +41,30 @@ class AddTodo extends React.Component {
                 
                 <ul className="todoList-todos">
                     {
-                        todoList.map(({ _id, todo, checked }) => (
-                            <li key={_id} className="todoList-content">
-                                <div>
-                                    <CheckboxTodo todoId={_id} todoCheck={checked} />
-                                    <span className={checked ? 'todoList-text todoList-text--active' : 'todoList-text'}>{todo}</span>
-                                </div>
-                                <div>
-                                    <span className="todoList-btn" onClick={this.handleClick(_id)}>x</span>
-                                </div>
-                            </li>
-                        ))
+                        displayTodoList === 'all' && (
+                            todoList.map(({ _id, todo, checked }) => (
+                                this.handleContent( _id, checked, todo)
+                            ))
+                        )
+                    }
+
+                    {/* todo active */}
+                    {
+                        displayTodoList === 'active' && (
+                            todoList.map(({ _id, todo, checked }) => (
+                                !checked && this.handleContent( _id, checked, todo)
+                                
+                            ))
+                        )
+                    }
+
+                    {/* todo completed */}
+                    {
+                        displayTodoList === 'completed' && (
+                            todoList.map(({ _id, todo, checked }) => (
+                                checked && this.handleContent( _id, checked, todo)
+                            ))
+                        )
                     }
                 </ul>
             </div>

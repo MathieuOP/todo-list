@@ -12,6 +12,7 @@ import { dataTodoList, deleteTodo } from '../store/reducer';
 
 const mapStateToProps = state => ({
   todoList: state.todoList,
+  displayTodoList: state.displayTodoList,
 });
 
 const mapDispatchToProps = dispatch => ({

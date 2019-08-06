@@ -65,7 +65,7 @@ const ajaxMiddleware = store => next => action => {
             return axios.put(`http://localhost:3001/update/${action.todoId}`)
                 .then((response) => {
                     // handle success
-                    console.log(response.data.data.checked);
+
                     if (response.data.update) {
                         next({
                             ...action,

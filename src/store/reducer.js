@@ -4,6 +4,7 @@
 const initialState = {
   todoList: [],
   inputAddTodo: '',
+  displayTodoList: 'all',
 };
 
 /**
@@ -14,6 +15,7 @@ export const ADD_TODO = 'ADD_TODO';
 export const DATA_TODO_LIST = 'DATA_TODO_LIST';
 export const DELETE_TODO = 'DELETE_TODO';
 export const PUT_TODO = 'INPUT_CHECKBOX';
+export const CHANGE_VIEW = 'CHANGE_VIEW';
 
 /**
  * Traitements
@@ -67,6 +69,11 @@ const reducer = (state = initialState, action = {}) => {
                 return data;
             }),
         }
+    case CHANGE_VIEW:
+        return {
+            ...state,
+            displayTodoList: action.content,
+        }
     default:
       return state;
   }
@@ -86,17 +93,22 @@ export const addTodo = () => ({
 
 export const dataTodoList = () => ({
     type: DATA_TODO_LIST,
-})
+});
 
 export const deleteTodo = (id) => ({
     type: DELETE_TODO,
     id,
-})
+});
 
 export const inputCheckbox = (todoId) => ({
     type: PUT_TODO,
     todoId,
-})
+});
+
+export const changeView = (content) => ({
+    type: CHANGE_VIEW,
+    content,
+});
 
 /**
  * Selectors

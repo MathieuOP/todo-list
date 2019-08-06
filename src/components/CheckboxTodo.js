@@ -4,8 +4,6 @@ import './assets/style/checkboxTodo.scss';
 const CheckboxTodo = ({inputCheckbox, todoId, todoCheck }) => {
 
     const handleChange = (todoId) => (e) => {
-        console.log(todoId);
-
         inputCheckbox(todoId);
     }
     
