@@ -1,0 +1,19 @@
+.button {
+    background-color: #403c60;
+    color: #fff;
+    border: none;
+    padding: 20px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+
+    &--active {
+        border: 1px solid #403c60;
+        background-color: #fff;
+        color: #403c60;
+    }
+}

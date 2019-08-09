@@ -1,7 +1,8 @@
 import React from 'react';
-import './assets/style/todoList.scss';
+import { FaRegCircle } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 
-import CheckboxTodo from '../containers/CheckboxTodo';
+import './assets/style/todoList.scss';
 
 class AddTodo extends React.Component {
 
@@ -17,17 +18,24 @@ class AddTodo extends React.Component {
         deleteTodo(id);
     }
 
-    handleContent = (id, checked, todo) => (
-        <li key={id} className="todoList-content">
-            <div>
-                <CheckboxTodo todoId={id} todoCheck={checked} />
-                <span className={checked ? 'todoList-text todoList-text--active' : 'todoList-text'}>
+    handleClickTodo = (todoId) => (e) => {
+        const { inputCheckbox } = this.props;
+        inputCheckbox(todoId);
+    }
+
+    displayTodos = (id, checked, todo) => (
+        <li key={id} className="todoList-wrapperContent">
+            <div className="todoList-content">
+                <div className="todoList-check" onClick={this.handleClickTodo(id)}>
+                    {
+                        checked ? <FaCheckCircle color="#403c60" size="1.3em" /> : <FaRegCircle color="#403c60" size="1.3em"/>
+                    }
+                </div>
+                <div className={checked ? 'todoList-text todoList-text--active' : 'todoList-text'}>
                     { todo }                                      
-                </span>
+                </div>
             </div>
-            <div>
-                <span className="todoList-btn" onClick={this.handleClick(id)}>x</span>
-            </div>
+            <button className="todoList-btn" onClick={this.handleClick(id)}>DELETE</button>
         </li>
     )
 
@@ -37,13 +45,13 @@ class AddTodo extends React.Component {
 
         return(
             <div className="todoList">
-                <h1 className="todoList-title">TodoList</h1>
+                <h1 className="todoList-title">My TodoList</h1>
                 
                 <ul className="todoList-todos">
                     {
                         displayTodoList === 'all' && (
                             todoList.map(({ _id, todo, checked }) => (
-                                this.handleContent( _id, checked, todo)
+                                this.displayTodos( _id, checked, todo)
                             ))
                         )
                     }
@@ -52,7 +60,7 @@ class AddTodo extends React.Component {
                     {
                         displayTodoList === 'active' && (
                             todoList.map(({ _id, todo, checked }) => (
-                                !checked && this.handleContent( _id, checked, todo)
+                                !checked && this.displayTodos( _id, checked, todo)
                                 
                             ))
                         )
@@ -62,7 +70,7 @@ class AddTodo extends React.Component {
                     {
                         displayTodoList === 'completed' && (
                             todoList.map(({ _id, todo, checked }) => (
-                                checked && this.handleContent( _id, checked, todo)
+                                checked && this.displayTodos( _id, checked, todo)
                             ))
                         )
                     }

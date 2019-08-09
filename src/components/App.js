@@ -8,14 +8,14 @@ import Button from '../containers/Button';
 
 const App = () => {
   return (
-    <div className="App">
+    <div className="app">
       <TodoList />
       <AddTodo />
 
-      <div className="buttons">
-        <Button content="All"/>
-        <Button content="Active"/>
-        <Button content="Completed"/>
+      <div className="app__buttons">
+        <Button active={true} content="ALL"/>
+        <Button content="ACTIVE"/>
+        <Button content="COMPLETED"/>
       </div>
     </div>
   );

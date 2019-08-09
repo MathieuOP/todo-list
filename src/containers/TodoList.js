@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import TodoList from '../components/TodoList';
 
 // Action Creators
-import { dataTodoList, deleteTodo } from '../store/reducer';
+import { dataTodoList, deleteTodo, inputCheckbox } from '../store/reducer';
 
 const mapStateToProps = state => ({
   todoList: state.todoList,
@@ -21,7 +21,10 @@ const mapDispatchToProps = dispatch => ({
   },
   deleteTodo: (id) => {
     dispatch(deleteTodo(id));
-  }
+  },
+  inputCheckbox: (todoId) => {
+    dispatch(inputCheckbox(todoId));
+  },
 });
 
 export default connect(

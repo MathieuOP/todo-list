@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
   },
   addTodo: () => {
     dispatch(addTodo());
-  }
+  },
 });
 
 export default connect(
