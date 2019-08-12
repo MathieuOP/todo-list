@@ -1,11 +1,10 @@
 import React from 'react';
 
-import './assets/style/button.scss';
+import './style/button.scss';
 
 const Button = ({ content, changeView, active }) => {
 
     const handleClick = (content) => (e) => {
-
         const contentLowerCase = content.toLowerCase();
         const allButtons = e.currentTarget.parentNode.childNodes;
         const currentButton = e.currentTarget;

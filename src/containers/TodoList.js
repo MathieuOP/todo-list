@@ -8,11 +8,14 @@ import { connect } from 'react-redux';
 import TodoList from '../components/TodoList';
 
 // Action Creators
-import { dataTodoList, deleteTodo, inputCheckbox } from '../store/reducer';
+import { dataTodoList, deleteTodo, inputCheckbox, updateForSlice } from '../store/reducer';
 
 const mapStateToProps = state => ({
   todoList: state.todoList,
   displayTodoList: state.displayTodoList,
+  startSlice: state.startSlice,
+  endSlice: state.endSlice,
+  nbTodoDisplay: state.nbTodoDisplay,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -25,6 +28,9 @@ const mapDispatchToProps = dispatch => ({
   inputCheckbox: (todoId) => {
     dispatch(inputCheckbox(todoId));
   },
+  updateForSlice: (currentButton) => {
+    dispatch(updateForSlice(currentButton));
+  }
 });
 
 export default connect(

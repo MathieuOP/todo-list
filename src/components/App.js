@@ -1,5 +1,5 @@
 import React from 'react';
-import './assets/style/app.scss';
+import './style/app.scss';
 
 // components
 import AddTodo from '../containers/AddTodo';

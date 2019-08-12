@@ -2,7 +2,7 @@
     width: 600px;
     margin: 0 auto;
 
-    &-title {
+    &__title {
         text-align: center;
         margin: 0;
         font-size: 4em;
@@ -12,18 +12,18 @@
         padding: 20px;
     }
 
-    &-todos {
+    &__todos {
         padding: 0;
         margin: 20px;
     }
 
-    &-check {
+    &__check {
         cursor: pointer;
         display: flex;
         align-items: center;
     }
 
-    &-wrapperContent {
+    &__wrapperContent {
         background-color: #fff;
         color: #403c60;
         padding: 20px 20px;
@@ -36,11 +36,11 @@
         align-items: center;
     }
 
-    &-content {
+    &__content {
         display: flex;
     }
 
-    &-text {
+    &__text {
         margin-left: 20px;
         word-break: break-all;
         padding-bottom: 3px;
@@ -51,10 +51,10 @@
         }
     }
 
-    &-btn {
+    &__btn {
         cursor: pointer;
         padding: 15px;
-        margin-left: 20px;
+        margin: 0 20px;
         background-color: #403c60;
         color: #fff;
         font-weight: bold;
@@ -65,5 +65,17 @@
         &:focus {
             outline: none;
         }
+
+        &--prev, &--next {
+            background-color: #fff;
+            color: #403c60;
+            font-size: 1.2em;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
     }
 }

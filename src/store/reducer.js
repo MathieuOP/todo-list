@@ -5,6 +5,9 @@ const initialState = {
   todoList: [],
   inputAddTodo: '',
   displayTodoList: 'all',
+  nbTodoDisplay: 0,
+  startSlice: 0,
+  endSlice: 3,
 };
 
 /**
@@ -16,6 +19,7 @@ export const DATA_TODO_LIST = 'DATA_TODO_LIST';
 export const DELETE_TODO = 'DELETE_TODO';
 export const PUT_TODO = 'INPUT_CHECKBOX';
 export const CHANGE_VIEW = 'CHANGE_VIEW';
+export const UPDATE_FOR_SLICE = 'UPDATE_FOR_SLICE';
 
 /**
  * Traitements
@@ -32,6 +36,7 @@ const reducer = (state = initialState, action = {}) => {
             todoList: [
                 ...action.data,
             ],
+            nbTodoDisplay: action.data.length,
         }
     case CHANGE_TODO_VALUE:
       return {
@@ -70,9 +75,22 @@ const reducer = (state = initialState, action = {}) => {
             }),
         }
     case CHANGE_VIEW:
+        const nbTodoDisplay = action.content === 'all' ? state.todoList.length 
+        : action.content === 'active' ? state.todoList.filter(todo => !todo.checked).length 
+        : state.todoList.filter(todo => todo.checked).length;
+        
         return {
             ...state,
             displayTodoList: action.content,
+            nbTodoDisplay,
+            startSlice: 0,
+            endSlice: 3,
+        }
+    case UPDATE_FOR_SLICE:
+        return {
+            ...state,
+            startSlice: action.currentButton === 'prev' ? state.startSlice - 3 : state.startSlice + 3,
+            endSlice: action.currentButton === 'prev' ? state.endSlice - 3 : state.endSlice + 3,
         }
     default:
       return state;
@@ -109,6 +127,11 @@ export const changeView = (content) => ({
     type: CHANGE_VIEW,
     content,
 });
+
+export const updateForSlice = (currentButton) => ({
+    type: UPDATE_FOR_SLICE,
+    currentButton,
+})
 
 /**
  * Selectors
