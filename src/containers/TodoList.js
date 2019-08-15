@@ -11,7 +11,7 @@ import TodoList from '../components/TodoList';
 import { dataTodoList, deleteTodo, inputCheckbox, updateForSlice } from '../store/reducer';
 
 const mapStateToProps = state => ({
-  todoList: state.todoList,
+  todoListFilter: state.todoListFilter,
   displayTodoList: state.displayTodoList,
   startSlice: state.startSlice,
   endSlice: state.endSlice,

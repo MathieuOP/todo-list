@@ -11,9 +11,7 @@ class AddTodo extends React.Component {
         dataTodoList();
     }
 
-    refTodoList = React.createRef();
-
-    handleClick = (id) => (e) => {
+    handleClickDelete = (id) => (e) => {
         e.preventDefault();
 
         const { deleteTodo } = this.props;
@@ -26,13 +24,13 @@ class AddTodo extends React.Component {
     }
 
     handleClickButtons = (currentButton) => () => {
-        const { updateForSlice, todoList, startSlice, endSlice } = this.props;
+        const { updateForSlice, todoListFilter, startSlice, endSlice } = this.props;
 
         if (currentButton === 'prev' && startSlice > 0 ) {
             updateForSlice(currentButton);
         }
 
-        if (currentButton === 'next' && endSlice < todoList.length) {
+        if (currentButton === 'next' && endSlice < todoListFilter.length) {
             updateForSlice(currentButton);
         }
     }
@@ -49,22 +47,21 @@ class AddTodo extends React.Component {
                     { todo }                                      
                 </div>
             </div>
-            <button className="todoList__btn" onClick={this.handleClick(id)}>DELETE</button>
+            <button className="todoList__btn" onClick={this.handleClickDelete(id)}>DELETE</button>
         </li>
     )
 
     render() {
-        const { todoList, displayTodoList, startSlice, endSlice, nbTodoDisplay } = this.props;
-        console.log(nbTodoDisplay);
-
+        const { displayTodoList, startSlice, endSlice, nbTodoDisplay, todoListFilter } = this.props;
+        
         return(
             <div className="todoList">
                 <h1 className="todoList__title">My TodoList</h1>
                 
-                <ul ref={this.refTodoList} className="todoList__todos">
+                <ul className="todoList__todos">
                     {
                         displayTodoList === 'all' && (
-                            todoList.slice(startSlice, endSlice).map(({ _id, todo, checked }) => (
+                            todoListFilter.slice(startSlice, endSlice).map(({ _id, todo, checked }) => (
                                 this.displayTodos( _id, checked, todo)
                             ))
                         )
@@ -73,9 +70,8 @@ class AddTodo extends React.Component {
                     {/* todo active */}
                     {
                         displayTodoList === 'active' && (
-                            todoList.slice(startSlice, endSlice).map(({ _id, todo, checked }) => (
+                            todoListFilter.slice(startSlice, endSlice).map(({ _id, todo, checked }) => (
                                 !checked && this.displayTodos( _id, checked, todo)
-                                
                             ))
                         )
                     }
@@ -83,9 +79,9 @@ class AddTodo extends React.Component {
                     {/* todo completed */}
                     {
                         displayTodoList === 'completed' && (
-                            todoList.slice(startSlice, endSlice).map(({ _id, todo, checked }) => (
-                                checked && this.displayTodos( _id, checked, todo)
-                            ))
+                            todoListFilter.slice(startSlice, endSlice).map(({ _id, todo, checked }) => {
+                                return checked && this.displayTodos( _id, checked, todo)
+                            })
                         )
                     }
                 </ul>
@@ -98,7 +94,7 @@ class AddTodo extends React.Component {
                     }
 
                     {
-                        (endSlice < todoList.length && nbTodoDisplay > 0) && (
+                        (endSlice < nbTodoDisplay && nbTodoDisplay > 0) && (
                             <button onClick={this.handleClickButtons('next')} className="todoList__btn todoList__btn--next">Next</button>
                         )
                     }

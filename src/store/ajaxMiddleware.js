@@ -45,10 +45,9 @@ const ajaxMiddleware = store => next => action => {
         return axios.delete(`http://localhost:3001/delete/${action.id}`)
             .then((response) => {
                 // handle success
+                
                 const { isDelete } = response.data;
-
                 const todoList = store.getState().todoList.filter(data => data._id !== action.id);
-                // console.log(todoList);
 
                 if (isDelete === true) {
                     next({
