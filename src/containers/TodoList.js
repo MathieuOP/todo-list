@@ -5,10 +5,11 @@ import { connect } from 'react-redux';
 /**
  * Local import
  */
-import TodoList from '../components/TodoList';
+import TodoList from 'components/TodoList';
 
 // Action Creators
-import { dataTodoList, deleteTodo, inputCheckbox, updateForSlice } from '../store/reducer';
+import { dataTodoList, deleteTodo, inputCheckbox, updateForSlice } from 'store/actions';
+
 
 const mapStateToProps = state => ({
   todoListFilter: state.todoListFilter,

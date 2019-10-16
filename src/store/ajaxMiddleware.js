@@ -5,7 +5,7 @@ import {
     DATA_TODO_LIST,
     DELETE_TODO,
     PUT_TODO,
-} from './reducer';
+} from './types.js';
 
 const ajaxMiddleware = store => next => action => {
   switch (action.type) {
@@ -24,11 +24,9 @@ const ajaxMiddleware = store => next => action => {
             });
     case ADD_TODO:
         return axios.post('http://localhost:3001/add', {
-                todo: store.getState().inputAddTodo,
+                todo: store.getState().inputValue,
             })
             .then((response) => {
-                // console.log(response.data.data);
-                
                 next({
                     ...action,
                     data: {

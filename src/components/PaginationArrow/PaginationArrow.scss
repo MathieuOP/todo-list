@@ -1,0 +1,27 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    &__btn {
+        cursor: pointer;
+        padding: 15px;
+        margin: 0 20px;
+        background-color: #403c60;
+        color: #fff;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+        }
+
+        &--prev, &--next {
+            background-color: #fff;
+            color: #403c60;
+            font-size: 1.2em;
+        }
+    }
+}

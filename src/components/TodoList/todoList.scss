@@ -1,0 +1,19 @@
+.todoList {
+    width: 600px;
+    margin: 0 auto;
+
+    &__title {
+        text-align: center;
+        margin: 0;
+        font-size: 4em;
+        background-color: #fff;
+        color: #403c60;
+        font-family: 'Courgette', cursive;
+        padding: 20px;
+    }
+
+    &__todos {
+        padding: 0;
+        margin: 20px;
+    }
+}
